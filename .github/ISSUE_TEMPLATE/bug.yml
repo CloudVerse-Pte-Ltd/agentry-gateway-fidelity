@@ -1,0 +1,16 @@
+name: Bug report
+description: Report incorrect suite behavior without including credentials or response bodies.
+body:
+  - type: textarea
+    attributes:
+      label: Observed behavior
+      description: Include case number, surface, verdict, and redacted details.
+    validations: { required: true }
+  - type: textarea
+    attributes:
+      label: Expected behavior
+    validations: { required: true }
+  - type: input
+    attributes:
+      label: Package version
+    validations: { required: true }

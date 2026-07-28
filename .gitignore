@@ -1,0 +1,8 @@
+node_modules/
+dist/
+gateway-fidelity-*.json
+gateway-fidelity-*.md
+*.log
+reports/
+.env*
+!.env.example

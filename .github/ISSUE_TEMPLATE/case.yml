@@ -1,0 +1,17 @@
+name: New fidelity case
+description: Propose an externally observable gateway-fidelity case.
+body:
+  - type: textarea
+    attributes:
+      label: Observable behavior
+      description: Explain how the direct-provider baseline and gateway can be compared.
+    validations: { required: true }
+  - type: dropdown
+    attributes:
+      label: Mode
+      options: [live, fixture]
+    validations: { required: true }
+  - type: textarea
+    attributes:
+      label: False-positive controls
+    validations: { required: true }

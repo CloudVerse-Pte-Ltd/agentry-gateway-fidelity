@@ -1,0 +1,22 @@
+{
+  "name": "@cloudverse/gateway-fidelity",
+  "version": "0.1.0",
+  "description": "Black-box fidelity testing for AI gateways",
+  "type": "module",
+  "license": "Apache-2.0",
+  "bin": { "gateway-fidelity": "dist/src/cli.js" },
+  "files": ["dist", "cases", "README.md", "LICENSE", "NOTICE", "CONTRIBUTING.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "test": "node --import tsx --test test/*.test.ts",
+    "prepack": "npm run clean && npm run build",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\""
+  },
+  "engines": { "node": ">=20" },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.8.0"
+  }
+}
