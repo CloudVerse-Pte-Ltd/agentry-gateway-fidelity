@@ -1,6 +1,6 @@
 import http from "node:http";
 
-export type InjectedDefect = "tool-choice-auto" | "cache-counters-dropped" | "buffered-stream" | "system-demoted" | "tool-input-truncated" | "model-substituted";
+export type InjectedDefect = "tool-choice-auto" | "cache-counters-dropped" | "buffered-stream" | "system-demoted" | "tool-input-truncated" | "model-substituted" | "namespace-forwarded";
 
 export async function startMockEndpoint(options: { defects?: InjectedDefect[]; defectCases?: number[] } = {}) {
   const defects = new Set(options.defects || []); const defectCases = new Set(options.defectCases || []); const sequence = new Map<string, number>();
@@ -15,6 +15,7 @@ export async function startMockEndpoint(options: { defects?: InjectedDefect[]; d
     if (body.gateway_fidelity_fixture === "mid_stream_error") { res.setHeader("content-type", "text/event-stream"); res.end(bad ? 'data: {"type":"response.output_text.delta","delta":"truncated"}\n\n' : 'event: error\ndata: {"type":"error","error":{"type":"fixture_stream_error"}}\n\n'); return; }
     if (body.model === "gateway-fidelity-model-that-must-not-exist" && !bad) { res.statusCode = 404; res.end(JSON.stringify({ error: { type: "not_found_error", code: "model_not_found" } })); return; }
     if (body.gateway_fidelity_unknown_parameter && !bad) { res.statusCode = 400; res.end(JSON.stringify({ error: { type: "invalid_request_error", code: "unknown_parameter" } })); return; }
+    if ((bad || defects.has("namespace-forwarded")) && caseNumber === 29) { res.statusCode = 400; res.end(JSON.stringify({ error: { type: "invalid_request_error", code: "unsupported_tool_type", param: "tools.0", message: "Input tag 'namespace' does not match the provider tool union." } })); return; }
 
     const rewriteChoice = defects.has("tool-choice-auto") && body.tool_choice != null;
     const requestedTools = Array.isArray(body.tools);
@@ -39,7 +40,8 @@ export async function startMockEndpoint(options: { defects?: InjectedDefect[]; d
     const identity: any = bad && caseNumber === 28 ? {} : { model };
     const idKey = `${caseNumber}:${path}`; const next = (sequence.get(idKey) || 0) + 1; sequence.set(idKey, next);
     const id = bad && [13,14].includes(caseNumber) ? `variable_${next}` : "stable_mock";
-    const selectedTools = bad && caseNumber === 6 ? body.tools?.slice(0, 1) : body.tools;
+    const selectedTools = (bad && caseNumber === 6 ? body.tools?.slice(0, 1) : body.tools)
+      ?.flatMap((entry: any) => entry?.type === "namespace" && Array.isArray(entry.tools) ? entry.tools : [entry]);
     const named = bad && caseNumber === 3 ? "wrong_tool" : undefined;
 
     if (path.includes("/messages")) {

@@ -1,0 +1,46 @@
+{
+  "capture": {
+    "client": "Codex Desktop",
+    "cliVersion": "0.146.0-alpha.3.1",
+    "capturedAt": "2026-07-28T01:14:26.889Z",
+    "sanitization": "Prompt text, descriptions, thread identifiers, paths, and secrets are replaced. Tool type, nesting, names, schemas, and optional-field presence are preserved."
+  },
+  "tool": {
+    "type": "namespace",
+    "name": "codex_app",
+    "description": "[SANITIZED]",
+    "tools": [
+      {
+        "type": "function",
+        "name": "navigate_to_codex_page",
+        "description": "[SANITIZED]",
+        "strict": false,
+        "defer_loading": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "threadId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "threadId"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "type": "function",
+        "name": "read_thread_terminal",
+        "description": "[SANITIZED]",
+        "strict": false,
+        "defer_loading": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": false
+        }
+      }
+    ]
+  }
+}

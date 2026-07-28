@@ -4,7 +4,8 @@ export type Feature =
   | "tool-auto" | "tool-required" | "tool-named" | "tool-schema" | "tool-loop" | "parallel-tools" | "tool-error"
   | "thinking" | "thinking-budget" | "cache" | "max-tokens" | "stop" | "determinism" | "seed" | "system" | "json"
   | "stream-deltas" | "finish-reason" | "terminal-usage" | "stream-error" | "stream-tools"
-  | "refusal-shape" | "retry-after" | "unknown-parameter" | "model-not-found" | "model-identity" | "usage-origin" | "response-identity";
+  | "refusal-shape" | "retry-after" | "unknown-parameter" | "model-not-found" | "model-identity" | "usage-origin" | "response-identity"
+  | "tool-namespace";
 
 const ALL = ["anthropic-messages", "openai-chat", "openai-responses"] as Surface[];
 
@@ -27,6 +28,18 @@ function request(feature: Feature, surface: Surface, model: string, maxTokens: n
   const body = base(surface, model, "Follow the request exactly. Return the marker FIDELITY_OK when appropriate.", maxTokens);
   const tools = [tool(surface)];
   if (feature.startsWith("tool-") || feature === "parallel-tools" || feature === "stream-tools") body.tools = feature === "parallel-tools" ? [tool(surface, "first_probe"), tool(surface, "second_probe")] : tools;
+  if (feature === "tool-namespace" && surface === "openai-responses") {
+    body.tools = [{
+      type: "namespace",
+      name: "codex_app",
+      description: "[SANITIZED]",
+      tools: [
+        { type: "function", name: "navigate_to_codex_page", description: "[SANITIZED]", strict: false, defer_loading: true, parameters: { type: "object", properties: { threadId: { type: "string" } }, required: ["threadId"], additionalProperties: false } },
+        { type: "function", name: "read_thread_terminal", description: "[SANITIZED]", strict: false, defer_loading: true, parameters: { type: "object", properties: {}, additionalProperties: false } },
+      ],
+    }];
+    body.tool_choice = "required";
+  }
   if (feature === "tool-required") body.tool_choice = surface === "anthropic-messages" ? { type: "any" } : "required";
   if (feature === "tool-named" || feature === "tool-schema" || feature === "stream-tools") body.tool_choice = surface === "anthropic-messages" ? { type: "tool", name: "record_fidelity" } : surface === "openai-chat" ? { type: "function", function: { name: "record_fidelity" } } : { type: "function", name: "record_fidelity" };
   if (feature === "parallel-tools") { if (surface !== "anthropic-messages") body.parallel_tool_calls = true; body.messages = surface === "anthropic-messages" ? [{ role: "user", content: "Call both tools in parallel." }] : body.messages; body.input = surface === "openai-responses" ? "Call both tools in parallel." : body.input; }
@@ -105,6 +118,7 @@ function observe(feature: Feature, response: WireResponse): Observation {
     case "model-identity": signal = modelSignal(response.json); featurePresent = true; break;
     case "usage-origin": featurePresent = /usage/.test(value); metadata = /input|prompt/.test(value) && /output|completion/.test(value); break;
     case "response-identity": featurePresent = /model|provider|owned_by/.test(value); metadata = featurePresent; break;
+    case "tool-namespace": featurePresent = /navigate_to_codex_page|read_thread_terminal/.test(value); break;
   }
   return { ...common, feature: featurePresent, metadata, complete, signal };
 }

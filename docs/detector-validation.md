@@ -32,4 +32,6 @@ The test harness runs each defect in isolation, compares every probe and surface
 | 26 | Return a different observable model identifier | INDICATIVE — possible substitution |
 | 27 | Remove non-streaming usage data | DEGRADED |
 | 28 | Remove serving model/provider identity | DEGRADED |
+| 29 | Forward a Codex `namespace` object into an incompatible provider tool union | REFUSED |
 
+The executable contract is in `test/suite.test.ts`. A case is validated only when its isolated mutant changes to the exact expected result. Case 29 additionally asserts the fixed path is `PASS` while its `namespace-forwarded` mutant is `REFUSED`.

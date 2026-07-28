@@ -11,9 +11,9 @@ import { startMockEndpoint, type InjectedDefect } from "./mock-endpoint.js";
 
 function baselineConfig(url: string) { return { baselineUrls: { anthropic: url, openai: url }, baselineKeys: { anthropic: "baseline-test-key", openai: "baseline-test-key" } }; }
 
-test("exports exactly 28 documented numbered cases", () => {
-  assert.equal(cases.length, 28);
-  assert.deepEqual(cases.map((item) => item.number), Array.from({ length: 28 }, (_, index) => index + 1));
+test("exports exactly 29 documented numbered cases", () => {
+  assert.equal(cases.length, 29);
+  assert.deepEqual(cases.map((item) => item.number), Array.from({ length: 29 }, (_, index) => index + 1));
   assert.equal(cases.filter((item) => item.mode === "fixture").map((item) => item.number).join(","), "20,22,23,25");
 });
 
@@ -63,11 +63,11 @@ test("runs the live suite against controlled mock baseline and gateway", async (
   const baseline = await startMockEndpoint(); const gateway = await startMockEndpoint();
   try {
     const surfaces = ["anthropic-messages","openai-chat","openai-responses"] as const;
-    assert.equal(plannedRequests({ surfaces: [...surfaces], modes: ["live"] }), 170);
+    assert.equal(plannedRequests({ surfaces: [...surfaces], modes: ["live"] }), 172);
     const report = await runSuite({ baseUrl: gateway.url, ...baselineConfig(baseline.url), key: "gateway-test-key", surfaces: [...surfaces], models: { "anthropic-messages": "mock", "openai-chat": "mock", "openai-responses": "mock" }, modes: ["live"], maxRequests: 200, maxTokens: 64, timeoutMs: 2_000 });
-    assert.equal(report.results.length, 80);
-    assert.equal(report.limits.requests, 170);
-    assert.equal(report.results.every((result) => result.status === "PASS" || (result.caseNumber === 14 && result.status === "INDETERMINATE") || (result.caseNumber === 24 && result.status === "REFUSED")), true, JSON.stringify(report.results.filter((result) => result.status !== "PASS")));
+    assert.equal(report.results.length, 83);
+    assert.equal(report.limits.requests, 172);
+    assert.equal(report.results.every((result) => result.status === "PASS" || ([14,29].includes(result.caseNumber) && result.status === "INDETERMINATE") || (result.caseNumber === 24 && result.status === "REFUSED")), true, JSON.stringify(report.results.filter((result) => result.status !== "PASS")));
     const rendered = markdown(report);
     assert.match(rendered, /OpenAI Chat Completions/);
     assert.doesNotMatch(rendered, /gateway-test-key|baseline-test-key/);
@@ -80,6 +80,7 @@ test("locks the per-case round-trip counts", () => {
   for (const caseNumber of [5, 7, 10, 13]) assert.deepEqual(counts.get(caseNumber)?.perSurfacePerTarget, { "anthropic-messages": 2, "openai-chat": 2, "openai-responses": 2 });
   assert.deepEqual(counts.get(14)?.perSurfacePerTarget, { "anthropic-messages": 0, "openai-chat": 2, "openai-responses": 2 });
   for (const caseNumber of [1,2,3,4,6,8,9,11,12,15,16,17,18,19,21,24,26,27,28]) assert.deepEqual(counts.get(caseNumber)?.perSurfacePerTarget, { "anthropic-messages": 1, "openai-chat": 1, "openai-responses": 1 });
+  assert.deepEqual(counts.get(29)?.perSurfacePerTarget, { "anthropic-messages": 0, "openai-chat": 0, "openai-responses": 1 });
 });
 
 test("case 14 renders an explicit zero-request Anthropic exclusion", async () => {
@@ -115,9 +116,9 @@ test("gateway delta reruns and merges only selected cells", async () => {
 
 test("every numbered case has a planted defect that changes its expected result", async () => {
   const expectedStatus = new Map<number, string>([
-    [1,"SILENTLY_REWRITTEN"],[2,"SILENTLY_REWRITTEN"],[3,"SILENTLY_REWRITTEN"],[4,"SILENTLY_REWRITTEN"],[5,"SILENTLY_REWRITTEN"],[6,"SILENTLY_REWRITTEN"],[7,"SILENTLY_REWRITTEN"],[8,"SILENTLY_REWRITTEN"],[9,"DEGRADED"],[10,"DEGRADED"],[11,"SILENTLY_REWRITTEN"],[12,"SILENTLY_REWRITTEN"],[13,"SILENTLY_REWRITTEN"],[14,"SILENTLY_REWRITTEN"],[15,"SILENTLY_REWRITTEN"],[16,"SILENTLY_REWRITTEN"],[17,"SILENTLY_REWRITTEN"],[18,"SILENTLY_REWRITTEN"],[19,"DEGRADED"],[20,"SILENTLY_REWRITTEN"],[21,"SILENTLY_REWRITTEN"],[22,"DEGRADED"],[23,"DEGRADED"],[24,"SILENTLY_REWRITTEN"],[25,"SILENTLY_REWRITTEN"],[26,"INDICATIVE"],[27,"DEGRADED"],[28,"DEGRADED"],
+    [1,"SILENTLY_REWRITTEN"],[2,"SILENTLY_REWRITTEN"],[3,"SILENTLY_REWRITTEN"],[4,"SILENTLY_REWRITTEN"],[5,"SILENTLY_REWRITTEN"],[6,"SILENTLY_REWRITTEN"],[7,"SILENTLY_REWRITTEN"],[8,"SILENTLY_REWRITTEN"],[9,"DEGRADED"],[10,"DEGRADED"],[11,"SILENTLY_REWRITTEN"],[12,"SILENTLY_REWRITTEN"],[13,"SILENTLY_REWRITTEN"],[14,"SILENTLY_REWRITTEN"],[15,"SILENTLY_REWRITTEN"],[16,"SILENTLY_REWRITTEN"],[17,"SILENTLY_REWRITTEN"],[18,"SILENTLY_REWRITTEN"],[19,"DEGRADED"],[20,"SILENTLY_REWRITTEN"],[21,"SILENTLY_REWRITTEN"],[22,"DEGRADED"],[23,"DEGRADED"],[24,"SILENTLY_REWRITTEN"],[25,"SILENTLY_REWRITTEN"],[26,"INDICATIVE"],[27,"DEGRADED"],[28,"DEGRADED"],[29,"REFUSED"],
   ]);
-  for (let caseNumber = 1; caseNumber <= 28; caseNumber += 1) {
+  for (let caseNumber = 1; caseNumber <= 29; caseNumber += 1) {
     const modes = [20,22,23,25].includes(caseNumber) ? ["fixture" as const] : ["live" as const];
     const baseline = await startMockEndpoint(); const good = await startMockEndpoint(); const bad = await startMockEndpoint({ defectCases: [caseNumber] });
     try {
@@ -132,14 +133,42 @@ test("every numbered case has a planted defect that changes its expected result"
   }
 });
 
+test("case 29 alone fails when the namespace-forwarding defect is planted and passes with the fix", async () => {
+  const baseline = await startMockEndpoint();
+  const fixedGateway = await startMockEndpoint();
+  const defectiveGateway = await startMockEndpoint({ defects: ["namespace-forwarded"] });
+  const common = {
+    ...baselineConfig(baseline.url),
+    key: "gateway-test-key",
+    surfaces: ["openai-responses"] as const,
+    models: { "openai-responses": "mock" } as const,
+    modes: ["live" as const],
+    caseNumbers: [29],
+    maxRequests: 2,
+    maxTokens: 64,
+    timeoutMs: 2_000,
+  };
+  try {
+    const fixed = await runSuite({ ...common, surfaces: [...common.surfaces], baseUrl: fixedGateway.url });
+    const planted = await runSuite({ ...common, surfaces: [...common.surfaces], baseUrl: defectiveGateway.url });
+    assert.deepEqual(fixed.results.map((result) => [result.caseNumber, result.status]), [[29, "PASS"]]);
+    assert.deepEqual(planted.results.map((result) => [result.caseNumber, result.status]), [[29, "REFUSED"]]);
+  } finally {
+    await baseline.close();
+    await fixedGateway.close();
+    await defectiveGateway.close();
+  }
+});
+
 test("known-bad gateway defects are caught without collateral findings", async () => {
-  const expectations: Array<{ defect: InjectedDefect; cases: number[]; status: "SILENTLY_REWRITTEN" | "DEGRADED" | "INDICATIVE" }> = [
-    { defect: "tool-choice-auto", cases: [2,3,4,21], status: "SILENTLY_REWRITTEN" },
+  const expectations: Array<{ defect: InjectedDefect; cases: number[]; status: "SILENTLY_REWRITTEN" | "DEGRADED" | "INDICATIVE" | "REFUSED" }> = [
+    { defect: "tool-choice-auto", cases: [2,3,4,21,29], status: "SILENTLY_REWRITTEN" },
     { defect: "cache-counters-dropped", cases: [10], status: "DEGRADED" },
     { defect: "buffered-stream", cases: [17], status: "SILENTLY_REWRITTEN" },
     { defect: "system-demoted", cases: [15], status: "SILENTLY_REWRITTEN" },
     { defect: "tool-input-truncated", cases: [4], status: "SILENTLY_REWRITTEN" },
     { defect: "model-substituted", cases: [26], status: "INDICATIVE" },
+    { defect: "namespace-forwarded", cases: [29], status: "REFUSED" },
   ];
   const referenceBaseline = await startMockEndpoint(); const referenceGateway = await startMockEndpoint();
   let reference;
@@ -160,8 +189,8 @@ test("known-bad gateway defects are caught without collateral findings", async (
   try {
     const report = await runSuite({ baseUrl: combinedGateway.url, ...baselineConfig(combinedBaseline.url), key: "gateway-test-key", surfaces: ["anthropic-messages","openai-chat","openai-responses"], models: { "anthropic-messages": "mock", "openai-chat": "mock", "openai-responses": "mock" }, modes: ["live"], maxRequests: 200, maxTokens: 64, timeoutMs: 2_000 });
     const changed = report.results.filter((result) => result.status !== referenceStatus.get(`${result.probeId}:${result.surface}`));
-    assert.deepEqual([...new Set(changed.map((result) => result.caseNumber))], [2,3,4,10,15,17,21,26]);
-    assert.equal(changed.every((result) => result.status === (result.caseNumber === 10 ? "DEGRADED" : result.caseNumber === 26 ? "INDICATIVE" : "SILENTLY_REWRITTEN")), true, JSON.stringify(changed));
+    assert.deepEqual([...new Set(changed.map((result) => result.caseNumber))], [2,3,4,10,15,17,21,26,29]);
+    assert.equal(changed.every((result) => result.status === (result.caseNumber === 10 ? "DEGRADED" : result.caseNumber === 26 ? "INDICATIVE" : result.caseNumber === 29 ? "REFUSED" : "SILENTLY_REWRITTEN")), true, JSON.stringify(changed));
   } finally { await combinedBaseline.close(); await combinedGateway.close(); }
 });
 

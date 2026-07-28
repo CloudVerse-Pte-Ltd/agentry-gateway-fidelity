@@ -4,7 +4,7 @@ Gateways modify requests in transit. Some modifications are necessary protocol t
 
 ## Detector validation
 
-Detector validation is separate from gateway results. **All 28 cases are validated against isolated planted defects; the validation matrix is in [`docs/detector-validation.md`](docs/detector-validation.md).** Each case must change to its exact expected result, and named gateway-level defects are also run together to detect interference.
+Detector validation is separate from gateway results. **All 29 cases are validated against isolated planted defects; the validation matrix is in [`docs/detector-validation.md`](docs/detector-validation.md).** Each case must change to its exact expected result, and named gateway-level defects are also run together to detect interference.
 
 Case 14 makes zero Anthropic requests. Without a direct-provider response proving lack of support, the Anthropic Messages cell is rendered explicitly as `INDETERMINATE`; it is never silently omitted.
 
@@ -74,7 +74,7 @@ The CLI prints request count and maximum tokens per request before sending anyth
 
 The default run contains live black-box cases. `--fixtures` additionally enables controlled cases for mid-stream errors, refusal provenance, rate limits, and model-not-found behavior. Those cases require an endpoint deliberately implementing the documented fixture behavior; they are reported as `fixture` and must never be presented as live proof.
 
-There are exactly 28 numbered case files in [`cases`](cases), with multiple probes permitted inside a case. See [CONTRIBUTING.md](CONTRIBUTING.md) for the extension contract.
+There are exactly 29 numbered case files in [`cases`](cases), with multiple probes permitted inside a case. See [CONTRIBUTING.md](CONTRIBUTING.md) for the extension contract.
 
 ## Privacy and redaction
 
