@@ -1,6 +1,6 @@
 import http from "node:http";
 
-export type InjectedDefect = "tool-choice-auto" | "cache-counters-dropped" | "buffered-stream" | "system-demoted" | "tool-input-truncated" | "model-substituted" | "namespace-forwarded";
+export type InjectedDefect = "tool-choice-auto" | "cache-counters-dropped" | "buffered-stream" | "system-demoted" | "tool-input-truncated" | "model-substituted" | "namespace-forwarded" | "usage-displaces-content";
 
 export async function startMockEndpoint(options: { defects?: InjectedDefect[]; defectCases?: number[] } = {}) {
   const defects = new Set(options.defects || []); const defectCases = new Set(options.defectCases || []); const sequence = new Map<string, number>();
@@ -27,6 +27,7 @@ export async function startMockEndpoint(options: { defects?: InjectedDefect[]; d
     const systemLost = (caseNumber === 15 && defects.has("system-demoted")) || (bad && caseNumber === 15);
     const systemEffective = !systemLost && (body.system || body.instructions || body.messages?.some((entry: any) => entry.role === "system"));
     let content = systemEffective ? "ORANGE_17" : JSON.stringify({ marker: "FIDELITY_OK" });
+    if ((bad || defects.has("usage-displaces-content")) && caseNumber === 30) content = "";
     if (bad && caseNumber === 12) content = "BEFORE_STOP STOP_HERE AFTER_STOP";
     if (bad && caseNumber === 16) content = "{not valid json";
     if (bad && [5,7].includes(caseNumber) && !requestedTools) content = "continuation dropped";

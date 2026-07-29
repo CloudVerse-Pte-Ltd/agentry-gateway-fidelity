@@ -74,7 +74,7 @@ The CLI prints request count and maximum tokens per request before sending anyth
 
 The default run contains live black-box cases. `--fixtures` additionally enables controlled cases for mid-stream errors, refusal provenance, rate limits, and model-not-found behavior. Those cases require an endpoint deliberately implementing the documented fixture behavior; they are reported as `fixture` and must never be presented as live proof.
 
-There are exactly 29 numbered case files in [`cases`](cases), with multiple probes permitted inside a case. See [CONTRIBUTING.md](CONTRIBUTING.md) for the extension contract.
+There are exactly 30 numbered case files in [`cases`](cases), with multiple probes permitted inside a case. Case 30 verifies that usage metadata and content coexist in the same successful response; usage-only success is an empty-delivery fidelity failure. See [CONTRIBUTING.md](CONTRIBUTING.md) for the extension contract.
 
 ## Privacy and redaction
 

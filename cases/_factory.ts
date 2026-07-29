@@ -5,7 +5,7 @@ export type Feature =
   | "thinking" | "thinking-budget" | "cache" | "max-tokens" | "stop" | "determinism" | "seed" | "system" | "json"
   | "stream-deltas" | "finish-reason" | "terminal-usage" | "stream-error" | "stream-tools"
   | "refusal-shape" | "retry-after" | "unknown-parameter" | "model-not-found" | "model-identity" | "usage-origin" | "response-identity"
-  | "tool-namespace";
+  | "tool-namespace" | "usage-content-coexistence";
 
 const ALL = ["anthropic-messages", "openai-chat", "openai-responses"] as Surface[];
 
@@ -119,6 +119,21 @@ function observe(feature: Feature, response: WireResponse): Observation {
     case "usage-origin": featurePresent = /usage/.test(value); metadata = /input|prompt/.test(value) && /output|completion/.test(value); break;
     case "response-identity": featurePresent = /model|provider|owned_by/.test(value); metadata = featurePresent; break;
     case "tool-namespace": featurePresent = /navigate_to_codex_page|read_thread_terminal/.test(value); break;
+    case "usage-content-coexistence": {
+      const output = extractText(response.json);
+      const usage = (response.json as any)?.usage;
+      featurePresent = response.ok && typeof output === "string" && output.length > 0;
+      metadata = Boolean(usage && typeof usage === "object" && Object.keys(usage).length > 0);
+      complete = featurePresent && metadata;
+      common.detail = featurePresent && metadata
+        ? "Content and usage metadata both survived in the same response."
+        : response.ok && metadata
+          ? "The response retained usage metadata but displaced all observable content."
+          : response.ok
+            ? "The response retained content but lost usage metadata."
+            : common.detail;
+      break;
+    }
   }
   return { ...common, feature: featurePresent, metadata, complete, signal };
 }

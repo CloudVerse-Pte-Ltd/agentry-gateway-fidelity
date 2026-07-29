@@ -6,4 +6,5 @@ import c17 from "./17-stream-deltas.js"; import c18 from "./18-finish-reason.js"
 import c21 from "./21-streamed-tool-calls.js"; import c22 from "./22-refusal-shape.js"; import c23 from "./23-rate-limit-retry-after.js"; import c24 from "./24-unknown-parameter.js";
 import c25 from "./25-model-not-found.js"; import c26 from "./26-model-substitution-advisory.js"; import c27 from "./27-usage-origin.js"; import c28 from "./28-response-identity.js";
 import c29 from "./29-codex-tool-namespace.js";
-export const cases = [c01,c02,c03,c04,c05,c06,c07,c08,c09,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29];
+import c30 from "./30-usage-must-not-displace-content.js";
+export const cases = [c01,c02,c03,c04,c05,c06,c07,c08,c09,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30];
