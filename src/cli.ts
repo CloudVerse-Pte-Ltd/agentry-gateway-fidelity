@@ -10,7 +10,7 @@ function parse(argv: string[]): Args {
     const item = argv[index];
     if (!item.startsWith("--")) throw new Error(`Unexpected argument: ${item}`);
     const key = item.slice(2);
-    if (["fixtures","help"].includes(key)) out[key] = true;
+    if (["fixtures","smoke","help"].includes(key)) out[key] = true;
     else if (["json","markdown"].includes(key)) out[key] = argv[index + 1]?.startsWith("--") || !argv[index + 1] ? true : argv[++index];
     else { const value = argv[++index]; if (!value || value.startsWith("--")) throw new Error(`--${key} requires a value`); out[key] = value; }
   }
@@ -23,7 +23,7 @@ const HELP = `Usage:
   gateway-fidelity --base-url <gateway> --key <gateway-key> --protocol anthropic|openai|both
     [--anthropic-baseline-url <url>] [--openai-baseline-url <url>] [--model <id>]
     [--anthropic-model <id>] [--openai-model <id>]
-    [--openai-chat-model <id>] [--openai-responses-model <id>] [--fixtures]
+    [--openai-chat-model <id>] [--openai-responses-model <id>] [--smoke] [--fixtures]
     [--gateway-auth bearer|native]
     [--max-requests <n>] [--max-tokens <n>] [--json [file]] [--markdown [file]]
 
@@ -59,17 +59,18 @@ async function main() {
     ...(surfaces.some((surface) => surface.startsWith("openai-")) ? { openai: required(args, "openai-baseline-key", "GATEWAY_FIDELITY_OPENAI_BASELINE_KEY") } : {}),
   };
   const modes: Mode[] = args.fixtures ? ["live","fixture"] : ["live"];
+  const caseNumbers = args.smoke ? [1, 10, 30] : undefined;
   const gatewayAuth = String(args["gateway-auth"] || "bearer");
   if (!['bearer','native'].includes(gatewayAuth)) throw new Error("--gateway-auth must be bearer or native");
   const maxRequests = Number(args["max-requests"] || 200);
   const maxTokens = Number(args["max-tokens"] || 64);
-  const preview = plannedRequests({ surfaces, modes });
+  const preview = plannedRequests({ surfaces, modes, caseNumbers });
   console.error(`Planned requests: ${preview}; maximum tokens per request: ${maxTokens}; request cap: ${maxRequests}.`);
   if (preview > maxRequests) throw new Error(`Planned request count ${preview} exceeds --max-requests ${maxRequests}.`);
   const report = await runSuite({
     baseUrl: required(args, "base-url"), baselineUrls,
     key: required(args, "key", "GATEWAY_FIDELITY_KEY"), baselineKeys,
-    surfaces, models, modes, gatewayAuth: gatewayAuth as "bearer" | "native", maxRequests, maxTokens, timeoutMs: Number(args["timeout-ms"] || 30_000),
+    surfaces, models, modes, caseNumbers, gatewayAuth: gatewayAuth as "bearer" | "native", maxRequests, maxTokens, timeoutMs: Number(args["timeout-ms"] || 30_000),
   });
   console.log(human(report));
   await writeReports(report, { json: output(args.json, "json"), markdown: output(args.markdown, "md") });

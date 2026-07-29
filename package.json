@@ -7,6 +7,9 @@
   "bin": { "gateway-fidelity": "dist/src/cli.js" },
   "files": ["dist", "cases", "docs", "examples", "fixtures", "README.md", "LICENSE", "NOTICE", "CONTRIBUTING.md"],
   "scripts": {
+    "start": "node --import tsx scripts/run-mock.ts",
+    "real": "node dist/src/cli.js",
+    "preflight": "node --import tsx scripts/preflight.ts",
     "build": "tsc -p tsconfig.json",
     "check": "tsc -p tsconfig.json --noEmit",
     "test": "node --import tsx --test test/*.test.ts",

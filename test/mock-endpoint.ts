@@ -5,6 +5,11 @@ export type InjectedDefect = "tool-choice-auto" | "cache-counters-dropped" | "bu
 export async function startMockEndpoint(options: { defects?: InjectedDefect[]; defectCases?: number[] } = {}) {
   const defects = new Set(options.defects || []); const defectCases = new Set(options.defectCases || []); const sequence = new Map<string, number>();
   const server = http.createServer(async (req, res) => {
+    if (req.method === "GET" && req.url === "/v1/models") {
+      res.setHeader("content-type", "application/json");
+      res.end(JSON.stringify({ data: [{ id: "mock-model" }] }));
+      return;
+    }
     const chunks: Buffer[] = []; for await (const chunk of req) chunks.push(Buffer.from(chunk));
     let body: any = {}; try { body = JSON.parse(Buffer.concat(chunks).toString("utf8") || "{}"); } catch { /* empty */ }
     const path = req.url || ""; const caseNumber = Number(JSON.stringify(body).match(/GF_CASE_(\d{2})/)?.[1] || 0); const bad = defectCases.has(caseNumber);
