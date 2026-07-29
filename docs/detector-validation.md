@@ -33,5 +33,6 @@ The test harness runs each defect in isolation, compares every probe and surface
 | 27 | Remove non-streaming usage data | DEGRADED |
 | 28 | Remove serving model/provider identity | DEGRADED |
 | 29 | Forward a Codex `namespace` object into an incompatible provider tool union | REFUSED |
+| 30 | Return usage metadata but remove otherwise valid response content | SILENTLY REWRITTEN |
 
-The executable contract is in `test/suite.test.ts`. A case is validated only when its isolated mutant changes to the exact expected result. Case 29 additionally asserts the fixed path is `PASS` while its `namespace-forwarded` mutant is `REFUSED`.
+The executable contract is in `test/suite.test.ts`. A case is validated only when its isolated mutant changes to the exact expected result. Case 29 additionally asserts the fixed path is `PASS` while its `namespace-forwarded` mutant is `REFUSED`. Case 30 asserts that usage-only success is an empty-delivery fidelity failure.

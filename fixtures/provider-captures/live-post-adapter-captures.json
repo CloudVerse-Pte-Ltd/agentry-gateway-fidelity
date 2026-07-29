@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "captureBoundary": "authenticated_product_surface_post_adapter",
+  "capturedAt": "2026-07-29",
+  "provenance": {
+    "source": "sanitized authenticated Playground probe record",
+    "rawProviderWirePayloadRetained": false,
+    "sanitized": true,
+    "removed": ["credentials", "organization identifiers", "workload identifiers", "request identifiers", "private prompt content"]
+  },
+  "warning": "These are real post-adapter delivery captures, not raw provider wire fixtures. They prove observed content and usage coexisted at this boundary; they do not independently validate raw adapter parsing.",
+  "captures": [
+    {
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001",
+      "apiVersion": "anthropic-messages-2023-06-01",
+      "content": "[sanitized non-empty assistant delivery]",
+      "usage": { "totalTokens": 164 },
+      "contentSanitized": true
+    },
+    {
+      "provider": "deepseek",
+      "model": "deepseek-v4-pro",
+      "apiVersion": "openai-compatible-chat-completions-v1",
+      "content": "adapter-content-ok",
+      "usage": { "totalTokens": 114 },
+      "contentSanitized": false
+    },
+    {
+      "provider": "mistral",
+      "model": "codestral-2508",
+      "apiVersion": "openai-compatible-chat-completions-v1",
+      "content": "adapter-content-ok",
+      "usage": { "totalTokens": 95 },
+      "contentSanitized": false
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-4o-mini",
+      "apiVersion": "openai-chat-completions-v1",
+      "content": "adapter-content-ok",
+      "usage": { "totalTokens": 99 },
+      "contentSanitized": false
+    },
+    {
+      "provider": "together",
+      "model": "meta-llama/Llama-3.3-70B-Instruct-Turbo",
+      "apiVersion": "openai-compatible-chat-completions-v1",
+      "content": "adapter-content-ok",
+      "usage": { "totalTokens": 124 },
+      "contentSanitized": false
+    },
+    {
+      "provider": "xai",
+      "model": "grok-4.20-0309-non-reasoning",
+      "apiVersion": "openai-compatible-chat-completions-v1",
+      "content": "adapter-content-ok",
+      "usage": { "totalTokens": 274 },
+      "contentSanitized": false
+    }
+  ]
+}

@@ -1,18 +1,50 @@
 # Gateway Fidelity
 
-Gateways modify requests in transit. Some modifications are necessary protocol translation; others are silent losses when a gateway does not understand a field. Callers are rarely told. Gateway Fidelity sends requests whose correct handling is observable in the response and compares every gateway observation with the same request sent directly to the provider.
+Gateway Fidelity is a black-box test suite that shows whether an AI gateway preserves provider behavior or silently changes it.
 
-## Detector validation
+Gateways translate requests, and a successful HTTP response does not prove that tools, streaming, usage, caching, or model identity survived that translation. This suite sends the same bounded probes through your gateway and directly to the provider, then reports only differences supported by positive baseline evidence.
 
-Detector validation is separate from gateway results. **All 29 cases are validated against isolated planted defects; the validation matrix is in [`docs/detector-validation.md`](docs/detector-validation.md).** Each case must change to its exact expected result, and named gateway-level defects are also run together to detect interference.
+> **Cost warning:** the default live run makes **178 HTTP requests** (89 paired gateway/direct observations), capped at **64 output tokens per request**. With small models it will commonly cost roughly **$0.05–$2 total**, but model and provider pricing can make it higher. The CLI prints the exact request count before sending traffic; check your providers' current prices and lower `--max-requests` or choose cheaper models if needed.
 
-Case 14 makes zero Anthropic requests. Without a direct-provider response proving lack of support, the Anthropic Messages cell is rendered explicitly as `INDETERMINATE`; it is never silently omitted.
+## Run it
 
-## The central result: delta from a direct baseline
+```bash
+git clone https://github.com/CloudVerse-Pte-Ltd/agentry-gateway-fidelity.git && cd agentry-gateway-fidelity && npm ci && npm run build
+export GATEWAY_FIDELITY_KEY=... GATEWAY_FIDELITY_ANTHROPIC_BASELINE_KEY=... GATEWAY_FIDELITY_OPENAI_BASELINE_KEY=...
+node dist/src/cli.js --base-url https://gateway.example.com --anthropic-baseline-url https://api.anthropic.com --openai-baseline-url https://api.openai.com --protocol both --anthropic-model YOUR_ANTHROPIC_MODEL --openai-model YOUR_OPENAI_MODEL --json --markdown
+less gateway-fidelity-$(date +%F).md
+```
 
-Each enabled protocol requires its own direct-provider baseline: `--anthropic-baseline-url` and/or `--openai-baseline-url`. `UNSUPPORTED` is assigned only when a recorded direct-provider response explicitly refuses or lacks the feature. Quota failures, authentication failures, malformed requests, transport errors, ambiguous successful responses, and unexecuted cells are `INDETERMINATE`. A feature that works directly but changes through the gateway is a gateway finding. Without that paired observation, the suite does not claim to know which layer lost the behavior.
+You need one key for your gateway plus a direct-provider key for each enabled protocol. For a single provider, use `--protocol anthropic` or `--protocol openai` and supply only that provider's baseline URL, key, and model.
 
-**Never use a gateway, proxy, router, or compatibility layer as a baseline.** Comparing one translating gateway with another can produce meaningless PASS results when both lose the same field. The baseline must be the provider's direct API. The CLI rejects a baseline URL identical to `--base-url`, but it cannot prove that some other hostname is truly direct; that remains the operator's responsibility.
+## Five verdicts
+
+- **PASS** — the feature arrived intact and behaved as requested.
+- **REFUSED (HONEST)** — the gateway could not preserve it and returned a structured error.
+- **DEGRADED** — behavior survived partially, but observable metadata or completeness was lost.
+- **SILENTLY REWRITTEN** — the request changed while the response looked successful.
+- **INDETERMINATE** — the evidence is insufficient to judge; the report always says why.
+
+**INDETERMINATE is a safety feature, not a broken test.** The suite refuses to turn authentication failures, quota errors, ambiguous successes, transport failures, or missing direct observations into claims about a gateway. A run with many indeterminate cells usually means the baseline, credentials, entitlement, or model choice needs attention. It does not mean those cells passed or failed.
+
+## Your traffic, your keys
+
+No test traffic goes to CloudVerse or to any service operated by this project. The CLI runs locally, uses **your keys** against **your gateway** and the provider's direct API, never phones home, and never includes keys or authorization headers in reports.
+
+## See output without spending money
+
+[`examples/mock-report.md`](examples/mock-report.md) is generated entirely from the controlled local mock endpoint. It demonstrates report shape and verdict language; it contains no vendor results. To reproduce it:
+
+```bash
+npm ci
+npm run sample
+```
+
+## How the comparison works
+
+Each enabled protocol requires its own direct-provider baseline. `UNSUPPORTED` is a baseline-evidence classification, not a sixth verdict: it is assigned only when a recorded direct response explicitly refuses or lacks the feature. Without that positive evidence, the result is `INDETERMINATE`.
+
+**Never use another gateway, proxy, router, or compatibility layer as the baseline.** Comparing two translating gateways can produce meaningless passes when both lose the same field.
 
 ```text
 direct provider ── same model, request, and limits ── gateway
@@ -20,64 +52,22 @@ direct provider ── same model, request, and limits ── gateway
        └──────────── compare observations ───────────┘
 ```
 
-OpenAI Chat Completions and OpenAI Responses are tested and reported as separate surfaces. Anthropic Messages is the third surface.
+OpenAI Chat Completions, OpenAI Responses, and Anthropic Messages are separate surfaces. Use `--anthropic-model`, `--openai-chat-model`, and `--openai-responses-model` if they require different identifiers. Gateway authentication defaults to bearer; use `--gateway-auth native` only when your gateway explicitly requires provider-native authentication.
 
-## Five verdicts
+Case 26 may emit **INDICATIVE — possible substitution** when observable identity differs. That is an advisory lead, never proof of substitution.
 
-The five evaluated verdicts are:
+## Detector validation and captures
 
-1. **PASS** — the feature arrived intact and behaved as requested.
-2. **REFUSED (HONEST)** — the gateway could not preserve it and returned a structured error.
-3. **DEGRADED** — behavior partially survived, but observable metadata or completeness was lost.
-4. **SILENTLY REWRITTEN** — the request changed while the response looked successful.
-5. **INDETERMINATE** — the case could not be evaluated; the result always includes the reason.
+All **30 cases** are validated against isolated planted defects; see [`docs/detector-validation.md`](docs/detector-validation.md). Case 30 verifies that content and usage coexist and that a usage-only “success” is an empty-delivery failure.
 
-An honest refusal is better than a silent success because the caller can branch, retry elsewhere, or fix the request. A successful response that quietly changes semantics gives the caller false confidence and can corrupt an agent loop without an actionable error.
+The sanitized six-provider captures in [`fixtures/provider-captures`](fixtures/provider-captures) preserve content-plus-usage examples from Anthropic, DeepSeek, Mistral, OpenAI, Together, and xAI. Their metadata states the capture boundary and provenance; they contain no keys, tenant IDs, request IDs, or private prompts.
 
-`UNSUPPORTED` is a baseline-evidence classification, not a sixth verdict. It requires an explicit direct-provider refusal or lack-of-capability response recorded in the result cell; without that positive evidence, the cell is `INDETERMINATE`. Case 26 can emit **INDICATIVE — possible substitution** when an observable identity signal diverges; this is advisory and never treated as proof of model substitution.
+Fixture cases enabled with `--fixtures` require an endpoint deliberately implementing the documented behavior. They are labelled `fixture` and must never be presented as live vendor proof.
 
-## Use
+## Responsible use
 
-```bash
-npx @cloudverse/gateway-fidelity \
-  --base-url https://gateway.example.com \
-  --anthropic-baseline-url https://api.anthropic.com \
-  --openai-baseline-url https://api.openai.com \
-  --key "$GATEWAY_KEY" \
-  --anthropic-baseline-key "$ANTHROPIC_KEY" \
-  --openai-baseline-key "$OPENAI_KEY" \
-  --gateway-auth bearer \
-  --protocol both \
-  --model model-id \
-  --max-requests 200 \
-  --max-tokens 64 \
-  --json \
-  --markdown
-```
+We do not publish comparative vendor results from our own runs. Please give a vendor a reasonable opportunity to investigate and respond before publishing a finding about its product. See [`docs/responsible-use.md`](docs/responsible-use.md).
 
-Use `--anthropic-model`, `--openai-chat-model`, and `--openai-responses-model` when the surfaces require different model identifiers. `--openai-model` remains a shared fallback for both OpenAI surfaces, and `--model` is the final fallback for every enabled surface. `--json` and `--markdown` may be used together and write separate files. Keys can instead be provided through `GATEWAY_FIDELITY_KEY`, `GATEWAY_FIDELITY_ANTHROPIC_BASELINE_KEY`, and `GATEWAY_FIDELITY_OPENAI_BASELINE_KEY`; keys are never included in reports.
-
-Gateway keys default to bearer authentication on every surface. Use `--gateway-auth native` only when the gateway explicitly requires provider-native authentication (`x-api-key` for Anthropic and bearer for OpenAI). Direct baselines always use the provider-native scheme.
-
-The CLI prints request count and maximum tokens per request before sending anything. `--max-requests` aborts before execution if the planned count is too high. This project intentionally does not estimate spend or maintain provider rate cards.
-
-## How to read results
-
-- Read each surface independently; translation may preserve Chat Completions while losing Responses semantics.
-- Treat `UNSUPPORTED` as an evidence-backed direct-provider limitation, not a gateway win or loss.
-- Treat `INDETERMINATE` as unfinished evaluation, never as an exclusion or pass.
-- Treat case 26 as a lead for investigation, not attribution evidence.
-- Check the run mode. Live and fixture results are never mixed implicitly.
-- A missing row means it was not run. It must not be interpreted as passing.
-
-## Live and fixture cases
-
-The default run contains live black-box cases. `--fixtures` additionally enables controlled cases for mid-stream errors, refusal provenance, rate limits, and model-not-found behavior. Those cases require an endpoint deliberately implementing the documented fixture behavior; they are reported as `fixture` and must never be presented as live proof.
-
-There are exactly 30 numbered case files in [`cases`](cases), with multiple probes permitted inside a case. Case 30 verifies that usage metadata and content coexist in the same successful response; usage-only success is an empty-delivery fidelity failure. See [CONTRIBUTING.md](CONTRIBUTING.md) for the extension contract.
-
-## Privacy and redaction
-
-The suite never reports keys or authorization headers. Reports contain observations needed for verdicts, not full prompts or provider responses. JSON and Markdown outputs are created with owner-only permissions where the operating system supports them.
+The cache-token undercount case study is documented at [`docs/case-studies/cache-token-undercount.md`](docs/case-studies/cache-token-undercount.md). It explains the detector and remediation without publishing a vendor verdict table.
 
 Apache-2.0 licensed. Publication and npm release remain subject to founder review.

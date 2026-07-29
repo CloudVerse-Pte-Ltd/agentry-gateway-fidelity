@@ -5,11 +5,12 @@
   "type": "module",
   "license": "Apache-2.0",
   "bin": { "gateway-fidelity": "dist/src/cli.js" },
-  "files": ["dist", "cases", "README.md", "LICENSE", "NOTICE", "CONTRIBUTING.md"],
+  "files": ["dist", "cases", "docs", "examples", "fixtures", "README.md", "LICENSE", "NOTICE", "CONTRIBUTING.md"],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "check": "tsc -p tsconfig.json --noEmit",
     "test": "node --import tsx --test test/*.test.ts",
+    "sample": "node --import tsx scripts/generate-sample.ts",
     "prepack": "npm run clean && npm run build",
     "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\""
   },

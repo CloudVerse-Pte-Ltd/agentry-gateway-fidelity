@@ -1,0 +1,2333 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-29T00:00:00.000Z",
+  "gateway": "mock://gateway",
+  "baselines": {
+    "anthropic": "mock://anthropic-direct",
+    "openai": "mock://openai-direct"
+  },
+  "models": {
+    "anthropic-messages": "mock-model",
+    "openai-chat": "mock-model",
+    "openai-responses": "mock-model"
+  },
+  "limits": {
+    "requests": 178,
+    "maxRequests": 200,
+    "maxTokensPerRequest": 64
+  },
+  "results": [
+    {
+      "caseNumber": 1,
+      "caseTitle": "Tool choice auto",
+      "probeId": "01.1",
+      "probeTitle": "Tool choice auto",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 1,
+      "caseTitle": "Tool choice auto",
+      "probeId": "01.1",
+      "probeTitle": "Tool choice auto",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 1,
+      "caseTitle": "Tool choice auto",
+      "probeId": "01.1",
+      "probeTitle": "Tool choice auto",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 2,
+      "caseTitle": "Tool choice required",
+      "probeId": "02.1",
+      "probeTitle": "Tool choice required",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 2,
+      "caseTitle": "Tool choice required",
+      "probeId": "02.1",
+      "probeTitle": "Tool choice required",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 2,
+      "caseTitle": "Tool choice required",
+      "probeId": "02.1",
+      "probeTitle": "Tool choice required",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 3,
+      "caseTitle": "Named tool choice",
+      "probeId": "03.1",
+      "probeTitle": "Named tool choice",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 3,
+      "caseTitle": "Named tool choice",
+      "probeId": "03.1",
+      "probeTitle": "Named tool choice",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 3,
+      "caseTitle": "Named tool choice",
+      "probeId": "03.1",
+      "probeTitle": "Named tool choice",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 4,
+      "caseTitle": "Tool schema round-trip",
+      "probeId": "04.1",
+      "probeTitle": "Tool schema round-trip",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 4,
+      "caseTitle": "Tool schema round-trip",
+      "probeId": "04.1",
+      "probeTitle": "Tool schema round-trip",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 4,
+      "caseTitle": "Tool schema round-trip",
+      "probeId": "04.1",
+      "probeTitle": "Tool schema round-trip",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 5,
+      "caseTitle": "Multi-turn tool loop",
+      "probeId": "05.1",
+      "probeTitle": "Multi-turn tool loop",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 5,
+      "caseTitle": "Multi-turn tool loop",
+      "probeId": "05.1",
+      "probeTitle": "Multi-turn tool loop",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 5,
+      "caseTitle": "Multi-turn tool loop",
+      "probeId": "05.1",
+      "probeTitle": "Multi-turn tool loop",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 6,
+      "caseTitle": "Parallel tool calls",
+      "probeId": "06.1",
+      "probeTitle": "Parallel tool calls",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 6,
+      "caseTitle": "Parallel tool calls",
+      "probeId": "06.1",
+      "probeTitle": "Parallel tool calls",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 6,
+      "caseTitle": "Parallel tool calls",
+      "probeId": "06.1",
+      "probeTitle": "Parallel tool calls",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 7,
+      "caseTitle": "Tool-result error shape",
+      "probeId": "07.1",
+      "probeTitle": "Tool-result error shape",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 7,
+      "caseTitle": "Tool-result error shape",
+      "probeId": "07.1",
+      "probeTitle": "Tool-result error shape",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 7,
+      "caseTitle": "Tool-result error shape",
+      "probeId": "07.1",
+      "probeTitle": "Tool-result error shape",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 8,
+      "caseTitle": "Extended thinking",
+      "probeId": "08.1",
+      "probeTitle": "Extended thinking",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 8,
+      "caseTitle": "Extended thinking",
+      "probeId": "08.1",
+      "probeTitle": "Extended thinking",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 8,
+      "caseTitle": "Extended thinking",
+      "probeId": "08.1",
+      "probeTitle": "Extended thinking",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 9,
+      "caseTitle": "Thinking budget",
+      "probeId": "09.1",
+      "probeTitle": "Thinking budget",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      }
+    },
+    {
+      "caseNumber": 9,
+      "caseTitle": "Thinking budget",
+      "probeId": "09.1",
+      "probeTitle": "Thinking budget",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      }
+    },
+    {
+      "caseNumber": 9,
+      "caseTitle": "Thinking budget",
+      "probeId": "09.1",
+      "probeTitle": "Thinking budget",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      }
+    },
+    {
+      "caseNumber": 10,
+      "caseTitle": "Prompt caching",
+      "probeId": "10.1",
+      "probeTitle": "Prompt caching",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      }
+    },
+    {
+      "caseNumber": 10,
+      "caseTitle": "Prompt caching",
+      "probeId": "10.1",
+      "probeTitle": "Prompt caching",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      }
+    },
+    {
+      "caseNumber": 10,
+      "caseTitle": "Prompt caching",
+      "probeId": "10.1",
+      "probeTitle": "Prompt caching",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      }
+    },
+    {
+      "caseNumber": 10,
+      "caseTitle": "Prompt caching",
+      "probeId": "10.2",
+      "probeTitle": "Prompt caching repeat 2",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      }
+    },
+    {
+      "caseNumber": 10,
+      "caseTitle": "Prompt caching",
+      "probeId": "10.2",
+      "probeTitle": "Prompt caching repeat 2",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      }
+    },
+    {
+      "caseNumber": 10,
+      "caseTitle": "Prompt caching",
+      "probeId": "10.2",
+      "probeTitle": "Prompt caching repeat 2",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      }
+    },
+    {
+      "caseNumber": 11,
+      "caseTitle": "Maximum tokens",
+      "probeId": "11.1",
+      "probeTitle": "Maximum tokens",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 11,
+      "caseTitle": "Maximum tokens",
+      "probeId": "11.1",
+      "probeTitle": "Maximum tokens",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 11,
+      "caseTitle": "Maximum tokens",
+      "probeId": "11.1",
+      "probeTitle": "Maximum tokens",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 12,
+      "caseTitle": "Stop sequences",
+      "probeId": "12.1",
+      "probeTitle": "Stop sequences",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 12,
+      "caseTitle": "Stop sequences",
+      "probeId": "12.1",
+      "probeTitle": "Stop sequences",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 12,
+      "caseTitle": "Stop sequences",
+      "probeId": "12.1",
+      "probeTitle": "Stop sequences",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 13,
+      "caseTitle": "Temperature zero determinism",
+      "probeId": "13.1",
+      "probeTitle": "Temperature zero determinism",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Gateway repeats matched under the requested determinism control.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "68806f7b47d4"
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "68806f7b47d4"
+      }
+    },
+    {
+      "caseNumber": 13,
+      "caseTitle": "Temperature zero determinism",
+      "probeId": "13.1",
+      "probeTitle": "Temperature zero determinism",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Gateway repeats matched under the requested determinism control.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "747babdbb5eb"
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "747babdbb5eb"
+      }
+    },
+    {
+      "caseNumber": 13,
+      "caseTitle": "Temperature zero determinism",
+      "probeId": "13.1",
+      "probeTitle": "Temperature zero determinism",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Gateway repeats matched under the requested determinism control.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "ce71cc973ca8"
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "ce71cc973ca8"
+      }
+    },
+    {
+      "caseNumber": 13,
+      "caseTitle": "Temperature zero determinism",
+      "probeId": "13.2",
+      "probeTitle": "Temperature zero determinism repeat 2",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Gateway repeats matched under the requested determinism control.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "68806f7b47d4"
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "68806f7b47d4"
+      }
+    },
+    {
+      "caseNumber": 13,
+      "caseTitle": "Temperature zero determinism",
+      "probeId": "13.2",
+      "probeTitle": "Temperature zero determinism repeat 2",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Gateway repeats matched under the requested determinism control.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "747babdbb5eb"
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "747babdbb5eb"
+      }
+    },
+    {
+      "caseNumber": 13,
+      "caseTitle": "Temperature zero determinism",
+      "probeId": "13.2",
+      "probeTitle": "Temperature zero determinism repeat 2",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Gateway repeats matched under the requested determinism control.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "ce71cc973ca8"
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "ce71cc973ca8"
+      }
+    },
+    {
+      "caseNumber": 14,
+      "caseTitle": "Seed determinism",
+      "probeId": "14.excluded",
+      "probeTitle": "Seed determinism",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "INDETERMINATE",
+      "detail": "The case could not be evaluated: The Anthropic Messages surface has no seed parameter; excluded without sending a request. No direct-provider response was recorded.",
+      "baseline": {
+        "supported": false,
+        "success": false,
+        "refused": false,
+        "feature": false,
+        "detail": "The Anthropic Messages surface has no seed parameter; excluded without sending a request."
+      }
+    },
+    {
+      "caseNumber": 14,
+      "caseTitle": "Seed determinism",
+      "probeId": "14.1",
+      "probeTitle": "Seed determinism",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Gateway repeats matched under the requested determinism control.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "747babdbb5eb"
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "747babdbb5eb"
+      }
+    },
+    {
+      "caseNumber": 14,
+      "caseTitle": "Seed determinism",
+      "probeId": "14.1",
+      "probeTitle": "Seed determinism",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Gateway repeats matched under the requested determinism control.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "ce71cc973ca8"
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "ce71cc973ca8"
+      }
+    },
+    {
+      "caseNumber": 14,
+      "caseTitle": "Seed determinism",
+      "probeId": "14.2",
+      "probeTitle": "Seed determinism repeat 2",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Gateway repeats matched under the requested determinism control.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "747babdbb5eb"
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "747babdbb5eb"
+      }
+    },
+    {
+      "caseNumber": 14,
+      "caseTitle": "Seed determinism",
+      "probeId": "14.2",
+      "probeTitle": "Seed determinism repeat 2",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Gateway repeats matched under the requested determinism control.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "ce71cc973ca8"
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "ce71cc973ca8"
+      }
+    },
+    {
+      "caseNumber": 15,
+      "caseTitle": "System message placement",
+      "probeId": "15.1",
+      "probeTitle": "System message placement",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 15,
+      "caseTitle": "System message placement",
+      "probeId": "15.1",
+      "probeTitle": "System message placement",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 15,
+      "caseTitle": "System message placement",
+      "probeId": "15.1",
+      "probeTitle": "System message placement",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 16,
+      "caseTitle": "Structured output",
+      "probeId": "16.1",
+      "probeTitle": "Structured output",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 16,
+      "caseTitle": "Structured output",
+      "probeId": "16.1",
+      "probeTitle": "Structured output",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 16,
+      "caseTitle": "Structured output",
+      "probeId": "16.1",
+      "probeTitle": "Structured output",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 17,
+      "caseTitle": "Incremental stream deltas",
+      "probeId": "17.1",
+      "probeTitle": "Incremental stream deltas",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 17,
+      "caseTitle": "Incremental stream deltas",
+      "probeId": "17.1",
+      "probeTitle": "Incremental stream deltas",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 17,
+      "caseTitle": "Incremental stream deltas",
+      "probeId": "17.1",
+      "probeTitle": "Incremental stream deltas",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 18,
+      "caseTitle": "Finish reason fidelity",
+      "probeId": "18.1",
+      "probeTitle": "Finish reason fidelity",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 18,
+      "caseTitle": "Finish reason fidelity",
+      "probeId": "18.1",
+      "probeTitle": "Finish reason fidelity",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 18,
+      "caseTitle": "Finish reason fidelity",
+      "probeId": "18.1",
+      "probeTitle": "Finish reason fidelity",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 19,
+      "caseTitle": "Terminal usage",
+      "probeId": "19.1",
+      "probeTitle": "Terminal usage",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      }
+    },
+    {
+      "caseNumber": 19,
+      "caseTitle": "Terminal usage",
+      "probeId": "19.1",
+      "probeTitle": "Terminal usage",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      }
+    },
+    {
+      "caseNumber": 19,
+      "caseTitle": "Terminal usage",
+      "probeId": "19.1",
+      "probeTitle": "Terminal usage",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      }
+    },
+    {
+      "caseNumber": 21,
+      "caseTitle": "Streamed tool calls",
+      "probeId": "21.1",
+      "probeTitle": "Streamed tool calls",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "complete": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "complete": true
+      }
+    },
+    {
+      "caseNumber": 21,
+      "caseTitle": "Streamed tool calls",
+      "probeId": "21.1",
+      "probeTitle": "Streamed tool calls",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "complete": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "complete": true
+      }
+    },
+    {
+      "caseNumber": 21,
+      "caseTitle": "Streamed tool calls",
+      "probeId": "21.1",
+      "probeTitle": "Streamed tool calls",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "complete": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "complete": true
+      }
+    },
+    {
+      "caseNumber": 24,
+      "caseTitle": "Unknown parameter handling",
+      "probeId": "24.1",
+      "probeTitle": "Unknown parameter handling",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Gateway preserved the controlled failure behavior and its observable metadata.",
+      "baseline": {
+        "supported": true,
+        "success": false,
+        "refused": false,
+        "httpStatus": 400,
+        "errorType": "invalid_request_error",
+        "errorCode": "unknown_parameter",
+        "detail": "HTTP 400 returned invalid_request_error/unknown_parameter.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": false,
+        "refused": false,
+        "httpStatus": 400,
+        "errorType": "invalid_request_error",
+        "errorCode": "unknown_parameter",
+        "detail": "HTTP 400 returned invalid_request_error/unknown_parameter.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 24,
+      "caseTitle": "Unknown parameter handling",
+      "probeId": "24.1",
+      "probeTitle": "Unknown parameter handling",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Gateway preserved the controlled failure behavior and its observable metadata.",
+      "baseline": {
+        "supported": true,
+        "success": false,
+        "refused": false,
+        "httpStatus": 400,
+        "errorType": "invalid_request_error",
+        "errorCode": "unknown_parameter",
+        "detail": "HTTP 400 returned invalid_request_error/unknown_parameter.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": false,
+        "refused": false,
+        "httpStatus": 400,
+        "errorType": "invalid_request_error",
+        "errorCode": "unknown_parameter",
+        "detail": "HTTP 400 returned invalid_request_error/unknown_parameter.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 24,
+      "caseTitle": "Unknown parameter handling",
+      "probeId": "24.1",
+      "probeTitle": "Unknown parameter handling",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Gateway preserved the controlled failure behavior and its observable metadata.",
+      "baseline": {
+        "supported": true,
+        "success": false,
+        "refused": false,
+        "httpStatus": 400,
+        "errorType": "invalid_request_error",
+        "errorCode": "unknown_parameter",
+        "detail": "HTTP 400 returned invalid_request_error/unknown_parameter.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": false,
+        "refused": false,
+        "httpStatus": 400,
+        "errorType": "invalid_request_error",
+        "errorCode": "unknown_parameter",
+        "detail": "HTTP 400 returned invalid_request_error/unknown_parameter.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 26,
+      "caseTitle": "Model substitution advisory",
+      "probeId": "26.1",
+      "probeTitle": "Model substitution advisory",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "No baseline/gateway identity divergence was observed.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "mock-model"
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "mock-model"
+      }
+    },
+    {
+      "caseNumber": 26,
+      "caseTitle": "Model substitution advisory",
+      "probeId": "26.1",
+      "probeTitle": "Model substitution advisory",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "No baseline/gateway identity divergence was observed.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "mock-model"
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "mock-model"
+      }
+    },
+    {
+      "caseNumber": 26,
+      "caseTitle": "Model substitution advisory",
+      "probeId": "26.1",
+      "probeTitle": "Model substitution advisory",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "No baseline/gateway identity divergence was observed.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "mock-model"
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "signal": "mock-model"
+      }
+    },
+    {
+      "caseNumber": 27,
+      "caseTitle": "Usage pass-through",
+      "probeId": "27.1",
+      "probeTitle": "Usage pass-through",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      }
+    },
+    {
+      "caseNumber": 27,
+      "caseTitle": "Usage pass-through",
+      "probeId": "27.1",
+      "probeTitle": "Usage pass-through",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      }
+    },
+    {
+      "caseNumber": 27,
+      "caseTitle": "Usage pass-through",
+      "probeId": "27.1",
+      "probeTitle": "Usage pass-through",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      }
+    },
+    {
+      "caseNumber": 28,
+      "caseTitle": "Provider and model identity",
+      "probeId": "28.1",
+      "probeTitle": "Provider and model identity",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      }
+    },
+    {
+      "caseNumber": 28,
+      "caseTitle": "Provider and model identity",
+      "probeId": "28.1",
+      "probeTitle": "Provider and model identity",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      }
+    },
+    {
+      "caseNumber": 28,
+      "caseTitle": "Provider and model identity",
+      "probeId": "28.1",
+      "probeTitle": "Provider and model identity",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true,
+        "metadata": true
+      }
+    },
+    {
+      "caseNumber": 29,
+      "caseTitle": "Codex dynamic tool namespace",
+      "probeId": "29.excluded",
+      "probeTitle": "Codex dynamic tool namespace",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "INDETERMINATE",
+      "detail": "The case could not be evaluated: Codex sends this container only on the OpenAI Responses wire protocol. No direct-provider response was recorded.",
+      "baseline": {
+        "supported": false,
+        "success": false,
+        "refused": false,
+        "feature": false,
+        "detail": "Codex sends this container only on the OpenAI Responses wire protocol."
+      }
+    },
+    {
+      "caseNumber": 29,
+      "caseTitle": "Codex dynamic tool namespace",
+      "probeId": "29.excluded",
+      "probeTitle": "Codex dynamic tool namespace",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "INDETERMINATE",
+      "detail": "The case could not be evaluated: Chat Completions has no namespace container shape. No direct-provider response was recorded.",
+      "baseline": {
+        "supported": false,
+        "success": false,
+        "refused": false,
+        "feature": false,
+        "detail": "Chat Completions has no namespace container shape."
+      }
+    },
+    {
+      "caseNumber": 29,
+      "caseTitle": "Codex dynamic tool namespace",
+      "probeId": "29.1",
+      "probeTitle": "Codex dynamic tool namespace",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Observable response matched the requested behavior.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Observable response matched the requested behavior.",
+        "feature": true
+      }
+    },
+    {
+      "caseNumber": 30,
+      "caseTitle": "Usage metadata must not displace content",
+      "probeId": "30.1",
+      "probeTitle": "Usage metadata must not displace content",
+      "mode": "live",
+      "surface": "anthropic-messages",
+      "status": "PASS",
+      "detail": "Content and usage metadata both survived in the same response.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Content and usage metadata both survived in the same response.",
+        "feature": true,
+        "metadata": true,
+        "complete": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Content and usage metadata both survived in the same response.",
+        "feature": true,
+        "metadata": true,
+        "complete": true
+      }
+    },
+    {
+      "caseNumber": 30,
+      "caseTitle": "Usage metadata must not displace content",
+      "probeId": "30.1",
+      "probeTitle": "Usage metadata must not displace content",
+      "mode": "live",
+      "surface": "openai-chat",
+      "status": "PASS",
+      "detail": "Content and usage metadata both survived in the same response.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Content and usage metadata both survived in the same response.",
+        "feature": true,
+        "metadata": true,
+        "complete": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Content and usage metadata both survived in the same response.",
+        "feature": true,
+        "metadata": true,
+        "complete": true
+      }
+    },
+    {
+      "caseNumber": 30,
+      "caseTitle": "Usage metadata must not displace content",
+      "probeId": "30.1",
+      "probeTitle": "Usage metadata must not displace content",
+      "mode": "live",
+      "surface": "openai-responses",
+      "status": "PASS",
+      "detail": "Content and usage metadata both survived in the same response.",
+      "baseline": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Content and usage metadata both survived in the same response.",
+        "feature": true,
+        "metadata": true,
+        "complete": true
+      },
+      "gateway": {
+        "supported": true,
+        "success": true,
+        "refused": false,
+        "httpStatus": 200,
+        "detail": "Content and usage metadata both survived in the same response.",
+        "feature": true,
+        "metadata": true,
+        "complete": true
+      }
+    }
+  ],
+  "summary": {
+    "PASS": 83,
+    "REFUSED": 0,
+    "DEGRADED": 0,
+    "SILENTLY_REWRITTEN": 0,
+    "UNSUPPORTED": 0,
+    "INDETERMINATE": 3,
+    "INDICATIVE": 0,
+    "SKIPPED": 0,
+    "ERROR": 0
+  }
+}
