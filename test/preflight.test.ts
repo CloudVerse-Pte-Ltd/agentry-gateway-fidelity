@@ -14,6 +14,18 @@ const required = [
   "GATEWAY_FIDELITY_OPENAI_MODEL",
 ];
 
+const summaryLabels = [
+  "PASS",
+  "REFUSED",
+  "DEGRADED",
+  "SILENTLY_REWRITTEN",
+  "UNSUPPORTED",
+  "INDETERMINATE",
+  "INDICATIVE",
+  "SKIPPED",
+  "ERROR",
+];
+
 test("real preflight reports every missing environment variable together", () => {
   const environment = { ...process.env };
   for (const name of required) delete environment[name];
@@ -42,4 +54,8 @@ test("README and env template document every real-preflight variable", () => {
   }
   assert.match(readme, /do not include `\/chat\/completions`/);
   assert.match(readme, /None of these eight variables is optional/);
+  for (const label of summaryLabels) {
+    assert.match(readme, new RegExp(`\\*\\*${label}(?: \\(HONEST\\))?\\*\\*`), `${label} must be documented`);
+  }
+  assert.match(readme, /`claude-sonnet-4-6`/);
 });
