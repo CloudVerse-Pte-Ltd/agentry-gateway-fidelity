@@ -29,7 +29,7 @@ That first run starts controlled local endpoints and prints a complete report in
 
 ## Your traffic, your keys
 
-No test traffic goes to CloudVerse or to any service operated by this project. The CLI runs locally, uses **your keys** against **your gateway** and the provider's direct API, never phones home, and never includes keys or authorization headers in reports.
+No test traffic goes to CloudVerse or to any service operated by this project. The CLI runs locally, uses **your keys** against **your gateway** and the provider's direct API, and never includes keys or authorization headers in reports.
 
 ## First paid run: smoke
 
@@ -90,4 +90,4 @@ We do not publish comparative vendor results from our own runs. Please give a ve
 
 The cache-token undercount case study is documented at [`docs/case-studies/cache-token-undercount.md`](docs/case-studies/cache-token-undercount.md). It explains the detector and remediation without publishing a vendor verdict table.
 
-Apache-2.0 licensed. Publication and npm release remain subject to founder review.
+Apache-2.0 licensed.
