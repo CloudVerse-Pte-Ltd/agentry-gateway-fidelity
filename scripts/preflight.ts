@@ -4,6 +4,17 @@ import { startMockEndpoint } from "../test/mock-endpoint.js";
 
 type Endpoint = { label: string; url: string; key: string; auth: "bearer" | "anthropic"; models: string[] };
 
+const REAL_ENVIRONMENT_VARIABLES = [
+  "GATEWAY_FIDELITY_GATEWAY_URL",
+  "GATEWAY_FIDELITY_KEY",
+  "GATEWAY_FIDELITY_ANTHROPIC_BASELINE_URL",
+  "GATEWAY_FIDELITY_ANTHROPIC_BASELINE_KEY",
+  "GATEWAY_FIDELITY_ANTHROPIC_MODEL",
+  "GATEWAY_FIDELITY_OPENAI_BASELINE_URL",
+  "GATEWAY_FIDELITY_OPENAI_BASELINE_KEY",
+  "GATEWAY_FIDELITY_OPENAI_MODEL",
+] as const;
+
 function pass(message: string): void { console.log(`PASS  ${message}`); }
 function fail(message: string): never { throw new Error(message); }
 
@@ -23,32 +34,42 @@ function requireInstallAndBuild(): void {
   pass("TypeScript build succeeds");
 }
 
-function env(name: string): string {
-  const value = process.env[name]?.trim();
-  if (!value) fail(`Missing ${name}. Copy .env.example, set the value in your shell, and rerun preflight.`);
-  return value;
+function realEnvironment(): Record<(typeof REAL_ENVIRONMENT_VARIABLES)[number], string> {
+  const missing = REAL_ENVIRONMENT_VARIABLES.filter((name) => !process.env[name]?.trim());
+  if (missing.length) {
+    fail(
+      `Missing required environment variables (${missing.length}):\n`
+      + missing.map((name) => `- ${name}`).join("\n")
+      + "\nCopy .env.example, fill every listed value, export the file into your shell as shown in README, and rerun preflight.",
+    );
+  }
+  return Object.fromEntries(
+    REAL_ENVIRONMENT_VARIABLES.map((name) => [name, process.env[name]!.trim()]),
+  ) as Record<(typeof REAL_ENVIRONMENT_VARIABLES)[number], string>;
 }
 
-function httpsUrl(name: string): string {
-  const value = env(name);
+function httpsUrl(name: string, value: string): string {
   let parsed: URL;
-  try { parsed = new URL(value); } catch { fail(`${name} is not a valid absolute URL. Use a URL such as https://gateway.example.com.`); }
+  try { parsed = new URL(value); } catch { fail(`${name} is not a valid absolute URL. Use a URL such as https://gateway.example.com/v1.`); }
   if (parsed.protocol !== "https:" && parsed.hostname !== "127.0.0.1" && parsed.hostname !== "localhost") {
     fail(`${name} must use HTTPS for a real endpoint.`);
   }
   return value.replace(/\/$/, "");
 }
 
-function key(name: string): string {
-  const value = env(name);
+function key(name: string, value: string): string {
   if (value.length < 8 || /\s/.test(value)) fail(`${name} does not look like an API key. Remove whitespace and provide the complete credential.`);
   return value;
+}
+
+function modelsUrl(baseUrl: string): string {
+  return `${baseUrl}${new URL(baseUrl).pathname.replace(/\/$/, "").endsWith("/v1") ? "/models" : "/v1/models"}`;
 }
 
 async function probe(endpoint: Endpoint): Promise<void> {
   let response: Response;
   try {
-    response = await fetch(`${endpoint.url}/v1/models`, {
+    response = await fetch(modelsUrl(endpoint.url), {
       headers: endpoint.auth === "anthropic"
         ? { "x-api-key": endpoint.key, "anthropic-version": "2023-06-01" }
         : { authorization: `Bearer ${endpoint.key}` },
@@ -86,15 +107,16 @@ async function mockPreflight(): Promise<void> {
 }
 
 async function realPreflight(): Promise<void> {
-  const gatewayUrl = httpsUrl("GATEWAY_FIDELITY_GATEWAY_URL");
-  const anthropicUrl = httpsUrl("GATEWAY_FIDELITY_ANTHROPIC_BASELINE_URL");
-  const openaiUrl = httpsUrl("GATEWAY_FIDELITY_OPENAI_BASELINE_URL");
+  const environment = realEnvironment();
+  const gatewayUrl = httpsUrl("GATEWAY_FIDELITY_GATEWAY_URL", environment.GATEWAY_FIDELITY_GATEWAY_URL);
+  const anthropicUrl = httpsUrl("GATEWAY_FIDELITY_ANTHROPIC_BASELINE_URL", environment.GATEWAY_FIDELITY_ANTHROPIC_BASELINE_URL);
+  const openaiUrl = httpsUrl("GATEWAY_FIDELITY_OPENAI_BASELINE_URL", environment.GATEWAY_FIDELITY_OPENAI_BASELINE_URL);
   if (new Set([gatewayUrl, anthropicUrl, openaiUrl]).size !== 3) fail("Gateway and direct-baseline URLs must be three distinct endpoints.");
-  const gatewayKey = key("GATEWAY_FIDELITY_KEY");
-  const anthropicKey = key("GATEWAY_FIDELITY_ANTHROPIC_BASELINE_KEY");
-  const openaiKey = key("GATEWAY_FIDELITY_OPENAI_BASELINE_KEY");
-  const anthropicModel = env("GATEWAY_FIDELITY_ANTHROPIC_MODEL");
-  const openaiModel = env("GATEWAY_FIDELITY_OPENAI_MODEL");
+  const gatewayKey = key("GATEWAY_FIDELITY_KEY", environment.GATEWAY_FIDELITY_KEY);
+  const anthropicKey = key("GATEWAY_FIDELITY_ANTHROPIC_BASELINE_KEY", environment.GATEWAY_FIDELITY_ANTHROPIC_BASELINE_KEY);
+  const openaiKey = key("GATEWAY_FIDELITY_OPENAI_BASELINE_KEY", environment.GATEWAY_FIDELITY_OPENAI_BASELINE_KEY);
+  const anthropicModel = environment.GATEWAY_FIDELITY_ANTHROPIC_MODEL;
+  const openaiModel = environment.GATEWAY_FIDELITY_OPENAI_MODEL;
   await probe({ label: "gateway", url: gatewayUrl, key: gatewayKey, auth: "bearer", models: [anthropicModel, openaiModel] });
   await probe({ label: "Anthropic direct baseline", url: anthropicUrl, key: anthropicKey, auth: "anthropic", models: [anthropicModel] });
   await probe({ label: "OpenAI direct baseline", url: openaiUrl, key: openaiKey, auth: "bearer", models: [openaiModel] });
@@ -103,6 +125,11 @@ async function realPreflight(): Promise<void> {
   console.log("Preflight itself made only free models-list requests. Run the smoke command printed in README before considering full.");
 }
 
-requireNode();
-requireInstallAndBuild();
-await (process.argv.includes("--real") ? realPreflight() : mockPreflight());
+try {
+  requireNode();
+  requireInstallAndBuild();
+  await (process.argv.includes("--real") ? realPreflight() : mockPreflight());
+} catch (error) {
+  console.error(`PREFLIGHT FAILED\n${error instanceof Error ? error.message : String(error)}`);
+  process.exitCode = 1;
+}

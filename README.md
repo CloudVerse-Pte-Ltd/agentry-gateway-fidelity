@@ -33,9 +33,30 @@ No test traffic goes to CloudVerse or to any service operated by this project. T
 
 ## First paid run: smoke
 
-You need one key for your gateway plus a direct-provider key for each enabled protocol. Copy `.env.example`, export its values into your shell, and select models that the same credentials can list.
+You need one key for your gateway plus a direct-provider key for each enabled protocol.
+
+### Configuration
+
+| Environment variable | What it is | Where to get it | Example value |
+| --- | --- | --- | --- |
+| `GATEWAY_FIDELITY_GATEWAY_URL` | The OpenAI-compatible base URL of the gateway under test, e.g. `https://your-gateway.example.com/v1` — do not include `/chat/completions`. | Your gateway's API documentation or deployment configuration. | `https://your-gateway.example.com/v1` |
+| `GATEWAY_FIDELITY_KEY` | API key used to authenticate to the gateway under test. | Create or copy a runtime API key from the gateway product's **API Keys** or workload-credentials page. Ask the gateway account administrator if you cannot create one; this is not a direct-provider key. | `gw_live_replace_me` |
+| `GATEWAY_FIDELITY_ANTHROPIC_BASELINE_URL` | Direct Anthropic API base URL used as the non-gateway baseline. | Anthropic's API documentation; normally keep the supplied default. | `https://api.anthropic.com` |
+| `GATEWAY_FIDELITY_ANTHROPIC_BASELINE_KEY` | Direct Anthropic credential. | Create an API key in the Anthropic Console for an account entitled to the selected model. | `sk-ant-replace-me` |
+| `GATEWAY_FIDELITY_ANTHROPIC_MODEL` | Anthropic model identifier tested through both paths. | The models list available to the same Anthropic credential and through your gateway. | `your-anthropic-model-id` |
+| `GATEWAY_FIDELITY_OPENAI_BASELINE_URL` | Direct OpenAI API base URL used as the non-gateway baseline. | OpenAI's API documentation; normally keep the supplied default. | `https://api.openai.com` |
+| `GATEWAY_FIDELITY_OPENAI_BASELINE_KEY` | Direct OpenAI credential. | Create a project API key from the OpenAI Platform API Keys page for a project entitled to the selected model. | `sk-proj-replace-me` |
+| `GATEWAY_FIDELITY_OPENAI_MODEL` | OpenAI model identifier tested through both paths. | The models list available to the same OpenAI project and through your gateway. | `your-openai-model-id` |
+
+The tool deliberately does not load `.env` files implicitly. Copy the template,
+replace every placeholder, and export it into the current POSIX shell:
 
 ```bash
+cp .env.example .env
+# Edit .env and replace every *_replace_me and your-*-model-id value.
+set -a
+. ./.env
+set +a
 npm run preflight -- --real
 npm run real -- \
   --base-url "$GATEWAY_FIDELITY_GATEWAY_URL" \

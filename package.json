@@ -13,6 +13,7 @@
     "build": "tsc -p tsconfig.json",
     "check": "tsc -p tsconfig.json --noEmit",
     "test": "node --import tsx --test test/*.test.ts",
+    "test:configured-preflight": "node --import tsx scripts/configured-preflight-test.ts",
     "sample": "node --import tsx scripts/generate-sample.ts",
     "prepack": "npm run clean && npm run build",
     "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\""
