@@ -1,13 +1,14 @@
 # Gateway fidelity report
 
 Generated: 2026-07-29T00:00:00.000Z
+Mode: mock (controlled local endpoints, no provider calls made)
 Gateway: mock://gateway
 Anthropic direct baseline: mock://anthropic-direct
 OpenAI direct baseline: mock://openai-direct
 
 > UNSUPPORTED requires an explicit direct-provider refusal or lack-of-capability response recorded in the cell. INDETERMINATE means the case could not be evaluated and is never silently excluded.
 
-## Live cases
+## Gateway comparison cases
 
 | Case | Anthropic Messages | OpenAI Chat Completions | OpenAI Responses |
 |---|---|---|---|

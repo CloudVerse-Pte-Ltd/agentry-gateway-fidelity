@@ -15,7 +15,7 @@ npm run preflight
 npm start
 ```
 
-That first run starts controlled local endpoints and prints a complete report in seconds. It needs no keys, sends no network traffic after installation, and makes no claim about a live gateway.
+That first run takes about **three minutes including installation**, starts controlled local endpoints, and prints a complete report. It needs no keys, sends no network traffic after installation, and makes no claim about a live gateway.
 
 ## Five verdicts
 

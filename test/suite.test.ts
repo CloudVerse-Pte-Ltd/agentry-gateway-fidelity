@@ -3,7 +3,7 @@ import { test } from "node:test";
 import { cases } from "../cases/index.js";
 import { cellsWithGatewayDetail, plannedGatewayRequestsForCells, rerunGatewayCells } from "../src/delta.js";
 import { redact } from "../src/redact.js";
-import { markdown } from "../src/reporters.js";
+import { human, markdown } from "../src/reporters.js";
 import { plannedRequests, plannedRequestsByCase, runSuite } from "../src/runner.js";
 import { isEventStream, requestHeaders } from "../src/transport.js";
 import { compareObservations } from "../src/verdict.js";
@@ -72,6 +72,33 @@ test("runs the live suite against controlled mock baseline and gateway", async (
     assert.match(rendered, /OpenAI Chat Completions/);
     assert.doesNotMatch(rendered, /gateway-test-key|baseline-test-key/);
   } finally { await baseline.close(); await gateway.close(); }
+});
+
+test("labels mock output and gateway comparison lanes unambiguously", async () => {
+  const baseline = await startMockEndpoint();
+  const gateway = await startMockEndpoint();
+  try {
+    const report = await runSuite({
+      baseUrl: gateway.url,
+      ...baselineConfig(baseline.url),
+      key: "gateway-test-key",
+      surfaces: ["openai-chat"],
+      models: { "openai-chat": "mock" },
+      modes: ["live"],
+      caseNumbers: [1],
+      maxRequests: 2,
+      maxTokens: 64,
+      timeoutMs: 2_000,
+    });
+    report.gateway = "mock://gateway";
+    const output = human(report);
+    assert.match(output, /Mode: mock \(controlled local endpoints, no provider calls made\)/);
+    assert.match(output, /^gateway\s+01 Tool choice auto/m);
+    assert.doesNotMatch(output, /^live\s+/m);
+  } finally {
+    await baseline.close();
+    await gateway.close();
+  }
 });
 
 test("locks the per-case round-trip counts", () => {
